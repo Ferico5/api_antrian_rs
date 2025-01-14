@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from pos_app.models import User, TablePasien, TableDokter, TableAntrian
 from api.serializers import TablePasienSerializers, TableDokterSerializers, TableAntrianSerializers, GetTableAntrianSerializers, LoginSerializers
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
 
 class TablePasienListApiView(APIView):
     def get(self, request, *args, **kwargs):
@@ -267,6 +268,36 @@ class TableAntrianDetailApiView(APIView):
             'data': serializers.data
         })
 
+    def put(self, request, id, *args, **kwargs):
+        id_antrian = self.get_id(id)
+
+        if not id_antrian:
+            return self.id_not_found(id)
+
+        data = {
+            'status_antrian': request.data.get('status_antrian'),
+            'pasien': request.data.get('pasien'),
+            'dokter': request.data.get('dokter'),
+        }
+
+        serializers = TableAntrianSerializers(instance = id_antrian, data = data, partial = True)
+
+        if serializers.is_valid():
+            serializers.save()
+
+            return Response({
+                'status': status.HTTP_200_OK,
+                'message': 'Data antrian berhasil diubah',
+                'data': serializers.data,
+            })
+
+
+        return Response({
+            'status': status.HTTP_400_BAD_REQUEST,
+            'message': 'Data antrian gagal diubah',
+            'errors': serializers.errors,
+        })
+
 
     def delete(self, request, id, *args, **kwargs):
         id_antrian = self.get_id(id)
@@ -283,6 +314,8 @@ class TableAntrianDetailApiView(APIView):
 
 
 class LoginView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request, *args, **kwargs):
         serializer = LoginSerializers(data=request.data)
         

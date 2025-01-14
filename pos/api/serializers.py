@@ -16,8 +16,8 @@ class TableDokterSerializers(serializers.ModelSerializer):
 
 
 class GetTableAntrianSerializers(serializers.ModelSerializer):
-    pasien = TablePasienSerializers(read_only=True)
-    dokter = TableDokterSerializers(read_only=True)
+    # pasien = TablePasienSerializers(read_only=True)
+    # dokter = TableDokterSerializers(read_only=True)
 
     class Meta:
         model = TableAntrian
@@ -27,6 +27,7 @@ class GetTableAntrianSerializers(serializers.ModelSerializer):
 class TableAntrianSerializers(serializers.ModelSerializer):
     pasien = serializers.PrimaryKeyRelatedField(queryset=TablePasien.objects.all())
     dokter = serializers.PrimaryKeyRelatedField(queryset=TableDokter.objects.all())
+    created_on = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = TableAntrian
