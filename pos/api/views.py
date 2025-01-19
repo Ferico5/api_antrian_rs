@@ -219,7 +219,6 @@ class TableAntrianListApiView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = {
-            'status_antrian': request.data.get('status_antrian', 'Sedang menunggu'),
             'pasien': request.data.get('pasien'),
             'dokter': request.data.get('dokter'),
         }
