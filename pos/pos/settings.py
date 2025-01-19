@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-l_9stpb=!_(z=4=*otam@@wnxyw^lb^mj8=6=_c1q1_vsk5rbl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2', 'api-antrian-rs.onrender.com']
 
 # Application definition
 
@@ -78,11 +78,18 @@ WSGI_APPLICATION = 'pos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL')  # Mengambil DATABASE_URL dari environment variable
+    )
 }
 
 
