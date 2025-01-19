@@ -13,3 +13,4 @@ urlpatterns = [
     path('api/table_antrian/<int:id>', views.TableAntrianDetailApiView.as_view()),
     path('api/login/', LoginView.as_view(), name='login'),
     path('api/logout/', LogoutView.as_view(), name='logout'),
+]
