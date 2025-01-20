@@ -13,7 +13,7 @@ class TablePasien(models.Model):
 
     nama = models.CharField(max_length = 200, null = False, blank = False)
     umur = models.IntegerField(null = False, blank = False)
-    gender = models.CharField(max_length = 6, choices = gender_choices, default = 'Pria')
+    gender = models.CharField(max_length = 6, choices = gender_choices, default = 'Male')
     alamat = models.CharField(max_length = 500)
     no_telp = models.CharField(max_length = 15, null = False, blank = False)
     email = models.EmailField(max_length = 255, unique = True)

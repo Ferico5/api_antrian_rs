@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nama', models.CharField(max_length=200)),
                 ('umur', models.IntegerField()),
-                ('gender', models.CharField(choices=[('Pria', 'Pria'), ('Wanita', 'Wanita')], default='Pria', max_length=6)),
+                ('gender', models.CharField(choices=[('Male', 'Male'), ('Female', 'Female')], default='Male', max_length=6)),
                 ('alamat', models.CharField(max_length=500)),
                 ('no_telp', models.CharField(max_length=15)),
                 ('email', models.EmailField(max_length=255, unique=True)),
