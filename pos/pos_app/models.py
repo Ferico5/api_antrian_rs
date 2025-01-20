@@ -7,8 +7,8 @@ class User(AbstractUser):
 
 class TablePasien(models.Model):
     gender_choices = (
-        ('Pria', 'Pria'),
-        ('Wanita', 'Wanita'),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     )
 
     nama = models.CharField(max_length = 200, null = False, blank = False)
